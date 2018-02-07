@@ -1,0 +1,46 @@
+/* mixin for multiline */
+.multiline-ellipsis {
+  overflow: hidden;
+  position: relative;
+  line-height: 1.2em;
+  max-height: 3.6em;
+  text-align: justify;
+  margin-right: 0;
+  padding-right: 1em; }
+  .multiline-ellipsis:before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0; }
+  .multiline-ellipsis:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: white; }
+
+.beer-card {
+  min-height: 600px;
+  margin: 50px; }
+  .beer-card .beer-label-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .beer-card .beer-label-container .beer-label {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      border: 7px solid #b9b9b9; }
+  .beer-card .infos-row {
+    margin: 35px 0; }
+    .beer-card .infos-row div {
+      margin: 5px 0; }
+  .beer-card .bottom-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-right: 40px; }
+  .beer-card .btn {
+    min-width: 100%; }
