@@ -28,19 +28,13 @@ class Order extends Component {
         });
     }
 
-    handleDropdownChange(event) {
-
-        console.log(event);
-        
+    handleDropdownChange(order, sort, event) {
         this.setState({
             dropdownOpen: !this.state.dropdownOpen,
-            order: event.target.order,
-            sort: event.target.sort
-        });
-    }
+            order: order,
+            sort: sort
+        },()=>this.props.refreshOrder(this.state));
 
-    search = () => {
-        this.props.atualizar(this.state);
     }
 
     render() {
@@ -48,14 +42,14 @@ class Order extends Component {
             <div id="beer-order">
                 <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                     <DropdownToggle caret>
-                        Sort By {this.state.order} {!this.state.sort?"":this.state.sort === "desc" ? "Descending" :"Ascending" }
+                        Sort by {this.state.order} {!this.state.sort?"":this.state.sort === "desc" ? "descending" :"ascending" }
                     </DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem onClick={this.handleDropdownChange} order={""} sort={""} >Default</DropdownItem>
-                        <DropdownItem onClick={this.handleDropdownChange} order={"ibu"} sort={"desc"} >IBU (High > Low)</DropdownItem>
-                        <DropdownItem onClick={this.handleDropdownChange} order={"ibu"} sort={"asc"} >IBU (Low > High)</DropdownItem>
-                        <DropdownItem onClick={this.handleDropdownChange} order={"abv"} sort={"desc"} >ABV (High > Low)</DropdownItem>
-                        <DropdownItem onClick={this.handleDropdownChange} order={"abv"} sort={"asc"} >ABV (Low > High)</DropdownItem>
+                    <DropdownMenu right>
+                        <DropdownItem onClick={this.handleDropdownChange.bind(null, "", "")}  >Default</DropdownItem>
+                        <DropdownItem onClick={this.handleDropdownChange.bind(null, "ibu", "desc")}  >IBU (High > Low)</DropdownItem>
+                        <DropdownItem onClick={this.handleDropdownChange.bind(null, "ibu", "asc")}  >IBU (Low > High)</DropdownItem>
+                        <DropdownItem onClick={this.handleDropdownChange.bind(null, "abv", "desc")}  >ABV (High > Low)</DropdownItem>
+                        <DropdownItem onClick={this.handleDropdownChange.bind(null, "abv", "asc")}  >ABV (Low > High)</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
             </div>

@@ -37,7 +37,7 @@ class Filter extends Component {
     }
 
     search = () => {
-        this.props.atualizar(this.state);
+        this.props.refreshFilters(this.state);
     }
 
     render() {
