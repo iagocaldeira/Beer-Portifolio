@@ -46,7 +46,7 @@ class Filter extends Component {
                 <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Filter</Button>
                 <Collapse isOpen={this.state.collapse}>
                     <Row >
-                        <Col xs="4">
+                        <Col md="4">
                             <Card>
                                 <CardBody>
                                     <FormGroup row>

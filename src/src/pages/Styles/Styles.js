@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 
 import API from '../../guidelines/api.instance';
 import config from '../../guidelines/base.config';
-import Beer from './Beer/Beer';
-import './Beers.css';
+import Style from './Style/Style';
+import './Styles.css';
 import { CardDeck, Row, Col } from 'reactstrap';
 import Filter from '../Shared/Filter/Filter';
 import Order from '../Shared/Order/Order';
 import Header from '../Shared/Header/Header';
 
-class Beers extends Component {
+class Styles extends Component {
 
     state = {}
 
@@ -79,7 +79,7 @@ class Beers extends Component {
                     <Row>
                         <CardDeck className="beer-card-deck">
                             {this.state.beers.map((object, i)=> {
-                                return <Beer refreshBeerFilter={this.getList} beer={object} key={i} />;
+                                return <Style refreshStyleFilter={this.getList} beer={object} key={i} />;
                             })}
                         </CardDeck>
                     </Row>
@@ -89,4 +89,4 @@ class Beers extends Component {
     }
 }
 
-export default Beers;
+export default Styles;

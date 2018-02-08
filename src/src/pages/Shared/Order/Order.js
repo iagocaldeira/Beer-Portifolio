@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 
 import './Order.css';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-// import Range from 'rc-slider/lib/Range';
-import 'rc-slider/assets/index.css';
-
-const Slider = require('rc-slider');
-const createSliderWithTooltip = Slider.createSliderWithTooltip;
-const Range = createSliderWithTooltip(Slider.Range);
 
 class Order extends Component {
 

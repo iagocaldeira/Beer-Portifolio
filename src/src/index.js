@@ -7,6 +7,7 @@ import createHistory from 'history/createBrowserHistory';
 
 import Beers from './pages/Beers/Beers'
 import './index.css'
+import Styles from './pages/Styles/Styles';
 
 const routeHistory = createHistory()
 
@@ -17,7 +18,7 @@ ReactDOM.render((
     <Router history={routeHistory}>
         <Switch>
             <Route path="/beers" component={Beers} />
-            {/* <Route path="/styles" component={Styles} /> */}
+            <Route path="/styles" component={Styles} />
             <Route path="/" component={Beers} />
         </Switch>
     </Router>

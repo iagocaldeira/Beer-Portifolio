@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import './Beer.css';
+import './Style.css';
 import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button, Col, Badge, Row
 } from 'reactstrap';
 import Details from '../Details/Details';
 
-class Beer extends Component {
+class Style extends Component {
 
     constructor(props) {
         super()
@@ -30,7 +30,7 @@ class Beer extends Component {
         }
         return (
             <div className="beer-label-container">
-                <CardImg className="beer-label" src={labelSource} alt="Beer Label" />
+                <CardImg className="beer-label" src={labelSource} alt="Style Label" />
             </div>
         )
     }
@@ -41,13 +41,13 @@ class Beer extends Component {
     }
 
     handleOrganicChange(value) {
-        this.setState({ ibu: null, abv: null, isOrganic: value }, ()=>this.props.refreshBeerFilter(this.state));
+        this.setState({ ibu: null, abv: null, isOrganic: value }, ()=>this.props.refreshStyleFilter(this.state));
     }
     handleAbvChange(value) {
-        this.setState({ ibu: null, abv: [value,value], isOrganic: null }, ()=>this.props.refreshBeerFilter(this.state));
+        this.setState({ ibu: null, abv: [value,value], isOrganic: null }, ()=>this.props.refreshStyleFilter(this.state));
     }
     handleIbuChange(value) {
-        this.setState({ ibu: [value,value], abv: null, isOrganic: null }, ()=>this.props.refreshBeerFilter(this.state));
+        this.setState({ ibu: [value,value], abv: null, isOrganic: null }, ()=>this.props.refreshStyleFilter(this.state));
     }
 
     render() {
@@ -74,7 +74,7 @@ class Beer extends Component {
                                 </Col>
                                 <Col xs="12" lg="auto">
                                     <Button onClick={this.handleOrganicChange.bind(null, this.props.beer.isOrganic)} color="dark" outline>
-                                        {this.props.beer.isOrganic === "Y" ? 'Organic Beer' : 'Non-Organic Beer'}
+                                        {this.props.beer.isOrganic === "Y" ? 'Organic Style' : 'Non-Organic Style'}
                                     </Button>
                                 </Col>
                             </Row>
@@ -98,4 +98,4 @@ class Beer extends Component {
     }
 }
 
-export default Beer;
+export default Style;
