@@ -11,9 +11,6 @@ import Styles from './pages/Styles/Styles';
 
 const routeHistory = createHistory()
 
-// API.defineRequestInterceptor(localStorage);
-// API.defineResponseInterceptor(routeHistory);
-
 ReactDOM.render((
     <Router history={routeHistory}>
         <Switch>
