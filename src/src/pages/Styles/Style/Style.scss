@@ -1,58 +1,10 @@
-/* mixin for multiline */
-@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
-  overflow: hidden;
-  position: relative;
-  line-height: $lineHeight;
-  max-height: $lineHeight * $lineCount; 
-  text-align: justify;
-  margin-right: 0;
-  padding-right: 1em;
-  &:before {
-    content: '...';
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-  &:after {
-    content: '';
-    position: absolute;
-    right: 0;
-    width: 1em;
-    height: 1em;
-    margin-top: 0.2em;
-    background: $bgColor;
-  }
-}
-.multiline-ellipsis {
-    @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 3, $bgColor: white);  
-}
-.beer-col{
+.style-col{
     flex: initial;
-    .beer-card{
+    .style-card{
         min-height: 600px;
-        margin: 50px;
-        .beer-label-container{
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            .beer-label{
-                width: 250px;
-                height: 250px;
-                border-radius: 50%;
-                border: 7px solid rgb(185, 185, 185);
-            }
-        }
-        .infos-row{
-            margin: 35px 0;
-            div{
-                margin: 5px 0;
-            }
-        }
-        .bottom-row{
-            display:flex;
-            justify-content:flex-end;
-            align-items:flex-end;
-            margin-right: 40px;
+        margin: 50px 0;
+        .col{
+            padding: 0;
         }
         .btn {
             min-width: 100%;

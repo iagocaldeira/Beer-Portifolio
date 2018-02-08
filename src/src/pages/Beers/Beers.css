@@ -1,2 +1,7 @@
 .app-container {
-  padding: 3rem 10%; }
+  padding: 3rem 3%; }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
