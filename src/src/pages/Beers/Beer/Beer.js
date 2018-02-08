@@ -5,13 +5,15 @@ import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button, Col, Badge, Row
 } from 'reactstrap';
+import { Animated } from "react-animated-css";
+
 import Details from '../Details/Details';
 
 class Beer extends Component {
 
     constructor(props) {
         super()
-        this.state = { ibu: null, abv: null, isOrganic: null}
+        this.state = { ibu: null, abv: null, isOrganic: null }
         this.handleOrganicChange = this.handleOrganicChange.bind(this);
         this.handleAbvChange = this.handleAbvChange.bind(this);
         this.handleIbuChange = this.handleIbuChange.bind(this);
@@ -38,61 +40,76 @@ class Beer extends Component {
     seeDetails = (event) => {
         event.preventDefault();
         event.stopPropagation();
+        this.refs.beerDetail.toggle(this.props.beer);
     }
 
     handleOrganicChange(value) {
-        this.setState({ ibu: null, abv: null, isOrganic: value }, ()=>this.props.refreshBeerFilter(this.state));
+        this.setState({ ibu: null, abv: null, isOrganic: value }, () => this.props.refreshBeerFilter(this.state));
     }
     handleAbvChange(value) {
-        this.setState({ ibu: null, abv: [value,value], isOrganic: null }, ()=>this.props.refreshBeerFilter(this.state));
+        this.setState({ ibu: null, abv: [value, value], isOrganic: null }, () => this.props.refreshBeerFilter(this.state));
     }
     handleIbuChange(value) {
-        this.setState({ ibu: [value,value], abv: null, isOrganic: null }, ()=>this.props.refreshBeerFilter(this.state));
+        this.setState({ ibu: [value, value], abv: null, isOrganic: null }, () => this.props.refreshBeerFilter(this.state));
     }
 
     render() {
         return (
             <Col sm="12" md="6" lg="4" xs="12" className="beer-col">
-                <Card className="beer-card">
-                    <CardBody>
-                        { this.renderLabels() }
-                        <CardTitle className="text-center">
-                            {this.props.beer.name}
-                        </CardTitle>
-                        <hr />
-                        <CardSubtitle>
-                            <Row className="infos-row" >
-                                <Col xs="12" lg="auto">
-                                    <Button onClick={this.handleIbuChange.bind(null, this.props.beer.ibu)} color="dark" outline>
-                                        IBU: <Badge color="light">{this.props.beer.ibu}</Badge>
-                                    </Button>
-                                </Col>
-                                <Col xs="12" lg="auto">
-                                    <Button onClick={this.handleAbvChange.bind(null, this.props.beer.abv)} color="dark" outline>
-                                        ABV: <Badge color="light">{this.props.beer.abv}</Badge>
-                                    </Button>
-                                </Col>
-                                <Col xs="12" lg="auto">
-                                    <Button onClick={this.handleOrganicChange.bind(null, this.props.beer.isOrganic)} color="dark" outline>
-                                        {this.props.beer.isOrganic === "Y" ? 'Organic Beer' : 'Non-Organic Beer'}
+                <Animated animationIn="fadeInUp" animationOut="fadeOut" isVisible={true}>
+                    <Card className="beer-card">
+                        <CardBody>
+                            {this.renderLabels()}
+                            <CardTitle className="text-center">
+                                {this.props.beer.name}
+                            </CardTitle>
+                            {(this.props.beer.style) &&
+                                <CardSubtitle className="text-center">
+                                    {this.props.beer.style.name}
+                                </CardSubtitle>
+                            }
+                            <hr />
+                            <CardSubtitle>
+                                <Row className="infos-row" >
+                                    {this.props.beer.ibu &&
+                                        <Col xs="12" lg="auto">
+                                            <Button onClick={this.handleIbuChange.bind(null, this.props.beer.ibu)} color="dark" outline>
+                                                IBU: <Badge color="light">{this.props.beer.ibu}</Badge>
+                                            </Button>
+                                        </Col>
+                                    }
+                                    {this.props.beer.abv &&
+                                        <Col xs="12" lg="auto">
+                                            <Button onClick={this.handleAbvChange.bind(null, this.props.beer.abv)} color="dark" outline>
+                                                ABV: <Badge color="light">{this.props.beer.abv}</Badge>
+                                            </Button>
+                                        </Col>
+                                    }
+                                    {this.props.beer.isOrganic &&
+                                        <Col xs="12" lg="auto">
+                                            <Button onClick={this.handleOrganicChange.bind(null, this.props.beer.isOrganic)} color="dark" outline>
+                                                {this.props.beer.isOrganic === "Y" ? 'Organic Beer' : ''}
+                                                {this.props.beer.isOrganic === "N" ? 'Non-Organic Beer' : ''}
+                                            </Button>
+                                        </Col>
+                                    }
+                                </Row>
+                            </CardSubtitle>
+                            <hr />
+                            <CardText className="multiline-ellipsis">
+                                {this.props.beer.description}
+                            </CardText>
+                            <Row className="bottom-row">
+                                <Col md={{ size: 3, offset: 1 }}>
+                                    <Button onClick={this.seeDetails}>
+                                        Details
                                     </Button>
                                 </Col>
                             </Row>
-                        </CardSubtitle>
-                        <hr />
-                        <CardText className="multiline-ellipsis">
-                            {this.props.beer.description}
-                        </CardText>
-                        <Row className="bottom-row">
-                            <Col md={{ size: 3, offset: 1 }}>
-                                <Button onClick={this.seeDetails}>
-                                    Details
-                                </Button>
-                            </Col>
-                        </Row>
-                    </CardBody>
-                </Card>
-                <Details ref="beerDetail" />
+                        </CardBody>
+                    </Card>
+                    <Details ref="beerDetail" />
+                </Animated>
             </Col>
         )
     }
