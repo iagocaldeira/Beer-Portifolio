@@ -1,43 +1,63 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
 
 import './Pages.css';
+import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 class Pages extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-            pageActive: props.pageActive,
-            pages: props.pages,
+            currentPage: props.currentPage,
+            numberOfPages: props.numberOfPages,
         };
         this.changePage = this.changePage.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
-          this.setState({ pageActive: nextProps.pageActive, pages: nextProps.pages });
+        this.setState({ currentPage: nextProps.currentPage, numberOfPages: nextProps.numberOfPages });
     }
 
-    changePage(page, aux){
-        this.props.updatePage(page);
+    changePage(page, aux) {
+        aux.preventDefault();
+        aux.stopPropagation();
+        this.setState({ currentPage: page });
+        this.props.changePage({ p: page });
     }
 
-    pagesNumber(total, active, changePageEvent){
+    pagesNumber(total, activePage, changePageEvent) {
         var result = [];
 
-        for(let pageNumber = 1; pageNumber <= total; pageNumber++)
-            result.push(<a className={'pages-number ' + ((active == pageNumber) ? 'active' : '')} key={pageNumber} onClick={changePageEvent.bind(this, pageNumber)}>{pageNumber}</a>);
-    
+        const firstPage = currentPage => (currentPage - 3) < 1 ? 1 : (currentPage - 3);
+
+        for (let currentPage = firstPage(currentPage); currentPage <= (currentPage+3); currentPage++) {
+            result.push(
+                <PaginationItem key={currentPage} active={(currentPage === activePage?true:undefined)} >
+                    <PaginationLink onClick={changePageEvent.bind(this, currentPage)}> {currentPage} </PaginationLink>
+                </PaginationItem>
+                );
+        }
+        result.push(<PaginationItem disabled key={null} ><PaginationLink >...</PaginationLink></PaginationItem>);
+        result.push(
+            <PaginationItem key={total} >
+                <PaginationLink active={(this.state.currentPage === total ? true : undefined)}  onClick={changePageEvent.bind(this, total)}> {total} </PaginationLink>
+            </PaginationItem>
+        );
+
         return result;
     }
 
-    render(){
+    render() {
         return (
-            <div className="pages">
-                <div className="pages-number-container">
-                    {this.pagesNumber(this.state.pages, this.state.pageActive, this.changePage)}
-                </div>
-            </div>
+            <Pagination size="lg">
+                <PaginationItem disabled={this.state.currentPage === 1}>
+                    <PaginationLink previous  />
+                </PaginationItem>
+                {this.pagesNumber(this.state.numberOfPages, this.state.currentPage, this.changePage)}
+                <PaginationItem disabled={this.state.currentPage === this.state.numberOfPages}>
+                    <PaginationLink next  />
+                </PaginationItem>
+            </Pagination>
         )
     }
 }

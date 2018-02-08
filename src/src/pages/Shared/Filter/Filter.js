@@ -43,7 +43,7 @@ class Filter extends Component {
     render() {
         return (
             <div id="beer-filter">
-                <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Filter</Button>
+                <Button onClick={this.toggle} style={{ marginBottom: '1rem' }}>Filter</Button>
                 <Collapse isOpen={this.state.collapse}>
                     <Row >
                         <Col md="4">
